@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+use strict;
+
+BEGIN {
+	use Log::Log4perl qw(:easy);
+	Log::Log4perl->easy_init($DEBUG);
+	$SIG{__DIE__} = sub { ERROR "@_" };
+	$SIG{__WARN__} = sub { WARN "$@_" };
+	$| = 1;
+}
+
+INFO "Starting";
+
+use Web::Factorial;
+
+
+my $fact = Web::Factorial->new( url => "http://support.clarive.com/rule/json/test?user=vadim" );
+print "The factorial of " . $fact->number . " is " . $fact->result . "\n";
